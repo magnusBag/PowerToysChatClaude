@@ -44,12 +44,20 @@ jobs:
         shell: pwsh
         run: |
           $projects = Get-ChildItem -Recurse -Filter *.csproj
+          Write-Output "Found $($projects.Count) project files"
           foreach ($project in $projects) {
+            Write-Output "Processing $($project.FullName)"
             $content = Get-Content $project.FullName -Raw
+            $originalContent = $content
             $content = $content -replace '<PackageReference Include="System.Text.Json" Version="[^"]*"', '<PackageReference Include="System.Text.Json" Version="8.0.5"'
             $content = $content -replace '<PackageReference Include="System.Runtime.Caching" Version="[^"]*"', '<PackageReference Include="System.Runtime.Caching" Version="8.0.1"'
-            Set-Content $project.FullName $content
+            if ($content -ne $originalContent) {
+              Write-Output "  Updated package references in $($project.Name)"
+              Set-Content $project.FullName $content
+            } else {
+              Write-Output "  No changes needed in $($project.Name)"
           }
+          Write-Output "Package update process completed"
 
       - name: Restore NuGet packages
         working-directory: PowerToys
