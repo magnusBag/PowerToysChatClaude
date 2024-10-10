@@ -1,0 +1,14 @@
+{
+  "ID": "2FA48E560F1D45C09FB969D6C403AA13",
+  "ActionKeyword": "cl",
+  "IsGlobal": false,
+  "Name": "ChatClaudePTR",
+  "Author": "MBA",
+  "Version": "0.82.1",
+  "Language": "csharp",
+  "Website": "https://github.com/ChatClaudePTR",
+  "ExecuteFileName": "Community.PowerToys.Run.Plugin.ChatClaudePTR.dll",
+  "IcoPathDark": "Images\\claude-ai-square.png",
+  "IcoPathLight": "Images\\claude-ai-square.png",
+  "DynamicLoading": false
+}

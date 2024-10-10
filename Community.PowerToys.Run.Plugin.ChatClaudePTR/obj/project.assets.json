@@ -1,0 +1,112 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-windows7.0": {
+      "Community.PowerToys.Run.Plugin.Dependencies/0.82.1": {
+        "type": "package",
+        "build": {
+          "buildTransitive/Community.PowerToys.Run.Plugin.Dependencies.props": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Community.PowerToys.Run.Plugin.Dependencies/0.82.1": {
+      "sha512": "T6IaHDdqXkpckMvkyqvj9J8C4Z42fdXK7MjjIWtJYG9IieVwd8zkggYXi4a7rOnnDdZTvcVGvt0G3YpE0RIxfA==",
+      "type": "package",
+      "path": "community.powertoys.run.plugin.dependencies/0.82.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "buildTransitive/Community.PowerToys.Run.Plugin.Dependencies.props",
+        "community.powertoys.run.plugin.dependencies.0.82.1.nupkg.sha512",
+        "community.powertoys.run.plugin.dependencies.nuspec",
+        "icon.png",
+        "tools/ARM64/PowerToys.Common.UI.dll",
+        "tools/ARM64/PowerToys.ManagedCommon.dll",
+        "tools/ARM64/PowerToys.Settings.UI.Lib.dll",
+        "tools/ARM64/Wox.Infrastructure.dll",
+        "tools/ARM64/Wox.Plugin.dll",
+        "tools/x64/PowerToys.Common.UI.dll",
+        "tools/x64/PowerToys.ManagedCommon.dll",
+        "tools/x64/PowerToys.Settings.UI.Lib.dll",
+        "tools/x64/Wox.Infrastructure.dll",
+        "tools/x64/Wox.Plugin.dll"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0-windows7.0": [
+      "Community.PowerToys.Run.Plugin.Dependencies >= 0.82.1"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\mba\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\mba\\Github\\ChatClaudePTR\\Community.PowerToys.Run.Plugin.ChatClaudePTR\\Community.PowerToys.Run.Plugin.ChatClaudePTR.csproj",
+      "projectName": "Community.PowerToys.Run.Plugin.ChatClaudePTR",
+      "projectPath": "C:\\Users\\mba\\Github\\ChatClaudePTR\\Community.PowerToys.Run.Plugin.ChatClaudePTR\\Community.PowerToys.Run.Plugin.ChatClaudePTR.csproj",
+      "packagesPath": "C:\\Users\\mba\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mba\\Github\\ChatClaudePTR\\Community.PowerToys.Run.Plugin.ChatClaudePTR\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\mba\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net8.0-windows7.0": {
+        "targetAlias": "net8.0-windows",
+        "dependencies": {
+          "Community.PowerToys.Run.Plugin.Dependencies": {
+            "target": "Package",
+            "version": "[0.82.1, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

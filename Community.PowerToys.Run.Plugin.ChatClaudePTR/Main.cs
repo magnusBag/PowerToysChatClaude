@@ -1,7 +1,3 @@
-﻿// Copyright (c) Microsoft Corporation
-// The Microsoft Corporation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,9 +9,8 @@ using Wox.Plugin;
 using Wox.Plugin.Logger;
 using BrowserInfo = Wox.Plugin.Common.DefaultBrowserInfo;
 
-namespace Community.PowerToys.Run.Plugin.Claude
-{
-    public class Main : IPlugin, IPluginI18n, IContextMenu, IReloadable, IDisposable
+namespace Community.PowerToys.Run.Plugin.ChatClaudePTR;
+public class Main : IPlugin, IPluginI18n, IContextMenu, IReloadable, IDisposable
     {
         // Should only be set in Init()
         private Action onPluginError;
@@ -28,13 +23,13 @@ namespace Community.PowerToys.Run.Plugin.Claude
 
         public static string PluginID => "2FA48E560F1D45C09FB969D6C403AA13";
 
-        public string Name => Properties.Resources.plugin_name;
+        public string Name => "ChatClaudePTR";
 
-        public string Description => Properties.Resources.plugin_description;
+        public string Description => "Chat with Claude AI";
 
-        private static readonly CompositeFormat InBrowserName = System.Text.CompositeFormat.Parse(Properties.Resources.plugin_in_browser_name);
-        private static readonly CompositeFormat Open = System.Text.CompositeFormat.Parse(Properties.Resources.plugin_open);
-        private static readonly CompositeFormat SearhFailed = System.Text.CompositeFormat.Parse(Properties.Resources.plugin_search_failed);
+        private static readonly CompositeFormat InBrowserName = System.Text.CompositeFormat.Parse("Chat with Claude");
+        private static readonly CompositeFormat Open = System.Text.CompositeFormat.Parse("Open in {0}");
+        private static readonly CompositeFormat SearchFailed = System.Text.CompositeFormat.Parse("Could not open search in {0}");
 
         public List<ContextMenuResult> LoadContextMenus(Result selectedResult)
         {
@@ -47,53 +42,48 @@ namespace Community.PowerToys.Run.Plugin.Claude
 
             var results = new List<Result>();
 
+            var searchTerm = query.Search;
             if (string.IsNullOrEmpty(query.Search))
             {
-                string arguments = "https://claude.ai/chat";
+                const string arguments = "https://claude.ai/new";
                 results.Add(new Result
                 {
-                    Title = Properties.Resources.plugin_description,
-                    SubTitle = string.Format(CultureInfo.CurrentCulture, InBrowserName, "Chrome"),
+                    Title = "Chat with Claude AI",
+                    SubTitle = string.Format(CultureInfo.CurrentCulture, InBrowserName, BrowserInfo.Name ?? BrowserInfo.MSEdgeName),
                     QueryTextDisplay = string.Empty,
                     IcoPath = _iconPath,
                     ProgramArguments = arguments,
                     Action = action =>
                     {
-                        if (!Helper.OpenCommandInShell("chrome.exe", "--new-window \"{0}\"", arguments))
-                        {
-                            onPluginError();
-                            return false;
-                        }
+                        if (Helper.OpenCommandInShell(BrowserInfo.Path, BrowserInfo.ArgumentsPattern, arguments))
+                            return true;
+                        onPluginError();
+                        return false;
 
-                        return true;
                     },
                 });
                 return results;
             }
             else
             {
-                string searchTerm = query.Search;
-
                 var result = new Result
                 {
                     Title = searchTerm,
-                    SubTitle = string.Format(CultureInfo.CurrentCulture, Open, "Chrome"),
+                    SubTitle = string.Format(CultureInfo.CurrentCulture, Open, BrowserInfo.Name ?? BrowserInfo.MSEdgeName),
                     QueryTextDisplay = searchTerm,
                     IcoPath = _iconPath,
                 };
 
-                string arguments = $"https://claude.ai/chat";
+                var arguments = $"https://claude.ai/new?q={HttpUtility.UrlEncode(searchTerm)}";
 
                 result.ProgramArguments = arguments;
                 result.Action = action =>
                 {
-                    if (!Helper.OpenCommandInShell("chrome.exe", "--new-window \"{0}\"", arguments))
-                    {
-                        onPluginError();
-                        return false;
-                    }
+                    if (Helper.OpenCommandInShell(BrowserInfo.Path, BrowserInfo.ArgumentsPattern, arguments))
+                        return true;
+                    onPluginError();
+                    return false;
 
-                    return true;
                 };
 
                 results.Add(result);
@@ -111,40 +101,33 @@ namespace Community.PowerToys.Run.Plugin.Claude
 
             onPluginError = () =>
             {
-                string errorMsgString = string.Format(CultureInfo.CurrentCulture, SearhFailed, BrowserInfo.Name ?? BrowserInfo.MSEdgeName);
+                var errorMsgString = string.Format(CultureInfo.CurrentCulture, SearchFailed, BrowserInfo.Name ?? BrowserInfo.MSEdgeName);
 
                 Log.Error(errorMsgString, this.GetType());
                 _context.API.ShowMsg(
-                    $"Plugin: {Properties.Resources.plugin_name}",
+                    "Plugin: ChatClaudePTR",
                     errorMsgString);
             };
         }
 
         public string GetTranslatedPluginTitle()
         {
-            return Properties.Resources.plugin_name;
+            return "ChatClaudePTR";
         }
 
         public string GetTranslatedPluginDescription()
         {
-            return Properties.Resources.plugin_description;
+            return "Chat with Claude AI";
         }
 
-        private void OnThemeChanged(Theme oldtheme, Theme newTheme)
+        private void OnThemeChanged(Theme oldTheme, Theme newTheme)
         {
             UpdateIconPath(newTheme);
         }
 
         private void UpdateIconPath(Theme theme)
         {
-            if (theme == Theme.Light || theme == Theme.HighContrastWhite)
-            {
-                _iconPath = "Images/ChatGPT.light.png";
-            }
-            else
-            {
-                _iconPath = "Images/ChatGPT.dark.png";
-            }
+            _iconPath = "Images/claude-ai-square.png";
         }
 
         public void ReloadData()
@@ -166,15 +149,12 @@ namespace Community.PowerToys.Run.Plugin.Claude
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposed && disposing)
+            if (_disposed || !disposing) return;
+            if (_context is { API: not null })
             {
-                if (_context != null && _context.API != null)
-                {
-                    _context.API.ThemeChanged -= OnThemeChanged;
-                }
-
-                _disposed = true;
+                _context.API.ThemeChanged -= OnThemeChanged;
             }
+
+            _disposed = true;
         }
     }
-}

@@ -1,0 +1,104 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Community.PowerToys.Run.Plugin.ChatClaudePTR/1.0.0": {
+        "dependencies": {
+          "Community.PowerToys.Run.Plugin.Dependencies": "0.82.1",
+          "PowerToys.Common.UI": "0.82.1.0",
+          "PowerToys.ManagedCommon": "0.82.1.0",
+          "PowerToys.Settings.UI.Lib": "0.82.1.0",
+          "Wox.Infrastructure": "0.82.1.0",
+          "Wox.Plugin": "0.82.1.0"
+        },
+        "runtime": {
+          "Community.PowerToys.Run.Plugin.ChatClaudePTR.dll": {}
+        }
+      },
+      "Community.PowerToys.Run.Plugin.Dependencies/0.82.1": {},
+      "PowerToys.Common.UI/0.82.1.0": {
+        "runtime": {
+          "PowerToys.Common.UI.dll": {
+            "assemblyVersion": "0.82.1.0",
+            "fileVersion": "0.82.1.0"
+          }
+        }
+      },
+      "PowerToys.ManagedCommon/0.82.1.0": {
+        "runtime": {
+          "PowerToys.ManagedCommon.dll": {
+            "assemblyVersion": "0.82.1.0",
+            "fileVersion": "0.82.1.0"
+          }
+        }
+      },
+      "PowerToys.Settings.UI.Lib/0.82.1.0": {
+        "runtime": {
+          "PowerToys.Settings.UI.Lib.dll": {
+            "assemblyVersion": "0.82.1.0",
+            "fileVersion": "0.82.1.0"
+          }
+        }
+      },
+      "Wox.Infrastructure/0.82.1.0": {
+        "runtime": {
+          "Wox.Infrastructure.dll": {
+            "assemblyVersion": "0.82.1.0",
+            "fileVersion": "0.82.1.0"
+          }
+        }
+      },
+      "Wox.Plugin/0.82.1.0": {
+        "runtime": {
+          "Wox.Plugin.dll": {
+            "assemblyVersion": "0.82.1.0",
+            "fileVersion": "0.82.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Community.PowerToys.Run.Plugin.ChatClaudePTR/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Community.PowerToys.Run.Plugin.Dependencies/0.82.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-T6IaHDdqXkpckMvkyqvj9J8C4Z42fdXK7MjjIWtJYG9IieVwd8zkggYXi4a7rOnnDdZTvcVGvt0G3YpE0RIxfA==",
+      "path": "community.powertoys.run.plugin.dependencies/0.82.1",
+      "hashPath": "community.powertoys.run.plugin.dependencies.0.82.1.nupkg.sha512"
+    },
+    "PowerToys.Common.UI/0.82.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PowerToys.ManagedCommon/0.82.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PowerToys.Settings.UI.Lib/0.82.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Wox.Infrastructure/0.82.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Wox.Plugin/0.82.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

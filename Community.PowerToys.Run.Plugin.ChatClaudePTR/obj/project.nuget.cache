@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "JZf6iV9J3yRF5oEO5EWWe0IInIH++PFCcYocsh2QEMF+85mpWGsikKOXKVIChjBTyXJVpoGKYTitAtLP93t7/Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mba\\Github\\ChatClaudePTR\\Community.PowerToys.Run.Plugin.ChatClaudePTR\\Community.PowerToys.Run.Plugin.ChatClaudePTR.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mba\\.nuget\\packages\\community.powertoys.run.plugin.dependencies\\0.82.1\\community.powertoys.run.plugin.dependencies.0.82.1.nupkg.sha512"
+  ],
+  "logs": []
+}
