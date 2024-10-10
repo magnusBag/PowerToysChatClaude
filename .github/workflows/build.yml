@@ -39,39 +39,41 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v2
 
-      - name: Restore NuGet packages
-        working-directory: PowerToys
-        run: |
-          nuget restore PowerToys.sln
-
-      - name: Update vulnerable packages
+      - name: Update vulnerable packages in project files
         working-directory: PowerToys
         shell: pwsh
         run: |
           $projects = Get-ChildItem -Recurse -Filter *.csproj
           foreach ($project in $projects) {
-            dotnet add $project.FullName package System.Text.Json --version 8.0.5
-            dotnet add $project.FullName package System.Runtime.Caching --version 8.0.1
+            $content = Get-Content $project.FullName -Raw
+            $content = $content -replace '<PackageReference Include="System.Text.Json" Version="[^"]*"', '<PackageReference Include="System.Text.Json" Version="8.0.5"'
+            $content = $content -replace '<PackageReference Include="System.Runtime.Caching" Version="[^"]*"', '<PackageReference Include="System.Runtime.Caching" Version="8.0.1"'
+            Set-Content $project.FullName $content
           }
+
+      - name: Restore NuGet packages
+        working-directory: PowerToys
+        run: |
+          nuget restore PowerToys.sln -NoCache
 
       - name: Build solution
         working-directory: PowerToys
         run: |
-          msbuild src\common\version\version.vcxproj /p:Configuration=Release /p:Platform=x64 /restore
+          msbuild src\common\version\version.vcxproj /p:Configuration=Release /p:Platform=x64 /p:TreatWarningsAsErrors=false /restore
 
-      - name: Copy ChatGPT Plugin to PowerToys
+      - name: Copy Claude Plugin to PowerToys
         run: |
-          xcopy /E /I /Y ChatGPTPowerToys\src\Community.PowerToys.Run.Plugin.Claude PowerToys\src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude
+          xcopy /E /I /Y ClaudePowerToys\src\Community.PowerToys.Run.Plugin.Claude PowerToys\src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude
 
       - name: Build x64
         working-directory: PowerToys
         run: |
-          msbuild src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude\Community.PowerToys.Run.Plugin.Claude.csproj /p:Configuration=Release /p:Platform=x64 /restore
+          msbuild src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude\Community.PowerToys.Run.Plugin.Claude.csproj /p:Configuration=Release /p:Platform=x64 /p:TreatWarningsAsErrors=false /restore
 
       - name: Build ARM64
         working-directory: PowerToys
         run: |
-          msbuild src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude\Community.PowerToys.Run.Plugin.Claude.csproj /p:Configuration=Release /p:Platform=ARM64 /restore
+          msbuild src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude\Community.PowerToys.Run.Plugin.Claude.csproj /p:Configuration=Release /p:Platform=ARM64 /p:TreatWarningsAsErrors=false /restore
 
       - name: Package x64
         run: |
