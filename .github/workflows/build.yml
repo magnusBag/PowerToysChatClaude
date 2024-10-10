@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   workflow_call:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build:
@@ -51,32 +51,32 @@ jobs:
 
       - name: Copy ChatClaude Plugin to PowerToys
         run: |
-          xcopy /E /I /Y ChatClaudePowerToys\src\Community.PowerToys.Run.Plugin.ChatClaude PowerToys\src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.ChatClaude
+          xcopy /E /I /Y ChatClaudePowerToys\src\Community.PowerToys.Run.Plugin.Claude PowerToys\src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude
 
       - name: Build x64
         working-directory: PowerToys
         run: |
-          msbuild src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.ChatClaude\Community.PowerToys.Run.Plugin.ChatClaude.csproj /p:Configuration=Release /p:Platform=x64 /restore
+          msbuild src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude\Community.PowerToys.Run.Plugin.Claude.csproj /p:Configuration=Release /p:Platform=x64 /restore
 
       - name: Build ARM64
         working-directory: PowerToys
         run: |
-          msbuild src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.ChatClaude\Community.PowerToys.Run.Plugin.ChatClaude.csproj /p:Configuration=Release /p:Platform=ARM64 /restore
+          msbuild src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude\Community.PowerToys.Run.Plugin.Claude.csproj /p:Configuration=Release /p:Platform=ARM64 /restore
 
       - name: Package x64
         run: |
-          Compress-Archive -Path PowerToys\x64\Release\RunPlugins\ChatClaude -DestinationPath Community.PowerToys.Run.Plugin.ChatClaude.x64.zip
+          Compress-Archive -Path PowerToys\x64\Release\RunPlugins\Claude -DestinationPath Community.PowerToys.Run.Plugin.Claude.x64.zip
 
       - name: Package ARM64
         run: |
-          Compress-Archive -Path PowerToys\ARM64\Release\RunPlugins\ChatClaude -DestinationPath Community.PowerToys.Run.Plugin.ChatClaude.ARM64.zip
+          Compress-Archive -Path PowerToys\ARM64\Release\RunPlugins\Claude -DestinationPath Community.PowerToys.Run.Plugin.Claude.ARM64.zip
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            Community.PowerToys.Run.Plugin.ChatClaude.x64.zip
-            Community.PowerToys.Run.Plugin.ChatClaude.ARM64.zip
+            Community.PowerToys.Run.Plugin.Claude.x64.zip
+            Community.PowerToys.Run.Plugin.Claude.ARM64.zip
           name: Release ${{ steps.get-latest-tag.outputs.LATEST_TAG }}
           tag_name: ${{ steps.get-latest-tag.outputs.LATEST_TAG }}
           make_latest: true
