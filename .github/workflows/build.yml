@@ -30,6 +30,7 @@ jobs:
           git submodule update --init --recursive
           echo "LATEST_TAG=$latestTag" >> $env:GITHUB_OUTPUT
           echo "Latest tag: $latestTag"
+
       - name: Checkout local repository
         uses: actions/checkout@v3
         with:
@@ -42,24 +43,40 @@ jobs:
         working-directory: PowerToys
         run: |
           nuget restore PowerToys.sln
+
+      - name: Update vulnerable packages
+        working-directory: PowerToys
+        shell: pwsh
+        run: |
+          $projects = Get-ChildItem -Recurse -Filter *.csproj
+          foreach ($project in $projects) {
+            dotnet add $project.FullName package System.Text.Json --version 8.0.5
+            dotnet add $project.FullName package System.Runtime.Caching --version 8.0.1
+          }
+
       - name: Build solution
         working-directory: PowerToys
         run: |
           msbuild src\common\version\version.vcxproj /p:Configuration=Release /p:Platform=x64 /restore
+
       - name: Copy ChatGPT Plugin to PowerToys
         run: |
           xcopy /E /I /Y ChatGPTPowerToys\src\Community.PowerToys.Run.Plugin.Claude PowerToys\src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude
+
       - name: Build x64
         working-directory: PowerToys
         run: |
           msbuild src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude\Community.PowerToys.Run.Plugin.Claude.csproj /p:Configuration=Release /p:Platform=x64 /restore
+
       - name: Build ARM64
         working-directory: PowerToys
         run: |
           msbuild src\modules\launcher\Plugins\Community.PowerToys.Run.Plugin.Claude\Community.PowerToys.Run.Plugin.Claude.csproj /p:Configuration=Release /p:Platform=ARM64 /restore
+
       - name: Package x64
         run: |
           Compress-Archive -Path PowerToys\x64\Release\RunPlugins\Claude -DestinationPath Community.PowerToys.Run.Plugin.Claude.x64.zip
+
       - name: Package ARM64
         run: |
           Compress-Archive -Path PowerToys\ARM64\Release\RunPlugins\Claude -DestinationPath Community.PowerToys.Run.Plugin.Claude.ARM64.zip
