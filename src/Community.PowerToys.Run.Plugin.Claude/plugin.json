@@ -7,7 +7,7 @@
     "Version": "1.0.0",
     "Language": "csharp",
     "Website": "https://aka.ms/powertoys",
-    "ExecuteFileName": "Community.PowerToys.Run.Plugin.ChatGPT.dll",
+    "ExecuteFileName": "Community.PowerToys.Run.Plugin.Claude.dll",
     "IcoPathDark": "Images\\ChatGPT.dark.png",
     "IcoPathLight": "Images\\ChatGPT.light.png"
 }

@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Community.PowerToys.Run.Plugin.ChatGPT.Properties {
+namespace Community.PowerToys.Run.Plugin.Claude.Properties {
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,15 +23,15 @@ namespace Community.PowerToys.Run.Plugin.ChatGPT.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -39,13 +39,13 @@ namespace Community.PowerToys.Run.Plugin.ChatGPT.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Community.PowerToys.Run.Plugin.ChatGPT.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Community.PowerToys.Run.Plugin.Claude.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
@@ -59,7 +59,7 @@ namespace Community.PowerToys.Run.Plugin.ChatGPT.Properties {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to the default browser.
         /// </summary>
@@ -68,16 +68,16 @@ namespace Community.PowerToys.Run.Plugin.ChatGPT.Properties {
                 return ResourceManager.GetString("plugin_browser", resourceCulture);
             }
         }
-        
+
         /// <summary>
-        ///   Looks up a localized string similar to Ask ChatGPT.
+        ///   Looks up a localized string similar to Ask Claude.
         /// </summary>
         internal static string plugin_description {
             get {
                 return ResourceManager.GetString("plugin_description", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to In the default browser.
         /// </summary>
@@ -86,7 +86,7 @@ namespace Community.PowerToys.Run.Plugin.ChatGPT.Properties {
                 return ResourceManager.GetString("plugin_in_browser", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to In {0}.
         /// </summary>
@@ -95,25 +95,25 @@ namespace Community.PowerToys.Run.Plugin.ChatGPT.Properties {
                 return ResourceManager.GetString("plugin_in_browser_name", resourceCulture);
             }
         }
-        
+
         /// <summary>
-        ///   Looks up a localized string similar to ChatGPT Search.
+        ///   Looks up a localized string similar to Claude Search.
         /// </summary>
         internal static string plugin_name {
             get {
                 return ResourceManager.GetString("plugin_name", resourceCulture);
             }
         }
-        
+
         /// <summary>
-        ///   Looks up a localized string similar to Prompt ChatGPT with {0}.
+        ///   Looks up a localized string similar to Prompt Claude with {0}.
         /// </summary>
         internal static string plugin_open {
             get {
                 return ResourceManager.GetString("plugin_open", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Failed to open {0}..
         /// </summary>
