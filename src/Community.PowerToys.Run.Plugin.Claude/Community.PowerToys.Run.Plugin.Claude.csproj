@@ -27,6 +27,10 @@
 		<DebugType>pdbonly</DebugType>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<WarningsNotAsErrors>$(WarningsNotAsErrors);NU1903</WarningsNotAsErrors>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<Compile Include="..\..\..\..\codeAnalysis\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
 	</ItemGroup>
