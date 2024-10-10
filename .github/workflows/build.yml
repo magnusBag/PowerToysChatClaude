@@ -49,7 +49,7 @@ jobs:
             Write-Output "Processing $($project.FullName)"
             $content = Get-Content $project.FullName -Raw
             if ($content -notmatch '<PropertyGroup>\s*<WarningsNotAsErrors>\$\(WarningsNotAsErrors\);NU1903</WarningsNotAsErrors>\s*</PropertyGroup>') {
-              $propertyGroup = @"<PropertyGroup><WarningsNotAsErrors>`$(WarningsNotAsErrors);NU1903</WarningsNotAsErrors></PropertyGroup>"@
+              $propertyGroup = "<PropertyGroup><WarningsNotAsErrors>`$(WarningsNotAsErrors);NU1903</WarningsNotAsErrors></PropertyGroup>"
               $content = $content -replace '</Project>', "$propertyGroup`n</Project>"
               Set-Content $project.FullName $content
               Write-Output "  Added WarningsNotAsErrors to $($project.Name)"
