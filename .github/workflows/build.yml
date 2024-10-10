@@ -56,6 +56,7 @@ jobs:
               Set-Content $project.FullName $content
             } else {
               Write-Output "  No changes needed in $($project.Name)"
+            }
           }
           Write-Output "Package update process completed"
 
